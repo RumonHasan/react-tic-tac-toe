@@ -15,7 +15,7 @@ export const winCombos = [
     [2, 4, 6]
 ];
 
-export let cellWinIndex = [];
+export let cellWinIndex = []; // storing cell index 
 
 // win check after grid completion
 export const checkWin = (currentChoiceClass, cellDomElements)=>{

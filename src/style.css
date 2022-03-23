@@ -65,3 +65,13 @@ body {
 .winBorder {
   border: 2px solid yellowgreen;
 }
+
+.restart-btn {
+  padding: 10px;
+  font-size: 20px;
+  margin: 10px;
+  border-radius: 30px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
