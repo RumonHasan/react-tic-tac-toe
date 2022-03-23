@@ -15,10 +15,13 @@ export const winCombos = [
     [2, 4, 6]
 ];
 
+export let cellWinIndex = [];
+
 // win check after grid completion
 export const checkWin = (currentChoiceClass, cellDomElements)=>{
     return winCombos.some((combos)=>{
         return combos.every((combo)=>{
+            cellDomElements.current[combo].classList.contains(currentChoiceClass) && cellWinIndex.push(combo);
             return cellDomElements.current[combo].classList.contains(currentChoiceClass)
         })
     })

@@ -6,6 +6,7 @@ const Message = (props) => {
   const {gameOver, setGameOver, setBoard, cellDomElements, playerClass} = useContext(GameContext);
   const {gameMessage} = props;
 
+  // main game restart function
   const restartGame = ()=>{
       setGameOver({
           ...gameOver,
@@ -14,12 +15,16 @@ const Message = (props) => {
       setBoard(defaultBoard);
       clearDomElements();
   }
+
+  // clearing the domelement of the block refs 
   const clearDomElements = ()=>{
-      cellDomElements.map((element)=>{
-          element.current.classList.remove(playerClass.circle);
-          element.current.classList.remove(playerClass.x);
+      cellDomElements.current.forEach((element)=>{
+          element.classList.remove(playerClass.circle);
+          element.classList.remove(playerClass.x);
+          element.textContent = '';
       })
-  }
+  };
+
   return (
     <div className='message-container'>{gameMessage}
         {gameOver.gameStatus && <button className='restart-btn' onClick={restartGame}>Restart Game</button>}

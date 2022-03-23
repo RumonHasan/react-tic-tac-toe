@@ -8,6 +8,8 @@ body {
   justify-content: center;
   align-items: center;
   background: black;
+  height: 100vh;
+  width: 100vw;
 }
 
 .game-container {
@@ -58,4 +60,8 @@ body {
   padding: 10px;
   font-size: 30px;
   font-weight: bold;
+}
+
+.winBorder {
+  border: 2px solid yellowgreen;
 }

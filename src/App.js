@@ -1,7 +1,7 @@
 import React,{createContext, useRef, useState} from 'react';
 import Board from './components/Board';
 import Message from './components/Message';
-import { defaultBoard, checkWin, checkDraw } from './extras';
+import { defaultBoard, checkWin, checkDraw, winCombos, cellWinIndex } from './extras';
 import './style.css';
 
 export const GameContext = createContext();
@@ -18,7 +18,8 @@ const App = () => {
   const playerSignChoice = {
       circle: 'O',
       x: 'X',
-  }
+  };
+  
 
     // adding cell element refs
     const addToDomRef = (element)=>{
@@ -46,8 +47,9 @@ const App = () => {
     setBoard(newBoard);
 
     // checking for game win
-    if(checkWin(currentChoiceClass, cellDomElements )){
+    if(checkWin(currentChoiceClass, cellDomElements)){
         setGameOver({gameStatus: true, draw: false});
+        addCellDomHighlight();
         return;
     }else if(checkDraw(playerClass, cellDomElements)){
         setGameOver({gameStatus: true, draw: true});
@@ -55,8 +57,12 @@ const App = () => {
     }else{
         changePlayerTurn();
     }
-    
   };
+
+  // adding cell highlight after win
+  const addCellDomHighlight = ()=> {
+    console.log(cellWinIndex);
+  }
 
   // adding the sign
   const addBoardChoiceSign = (currentChoiceClass, cellBlock) =>{
@@ -74,10 +80,17 @@ const App = () => {
   return (
     <div className='game-container'>
         <GameContext.Provider value={{
-            board, setBoard, playerClass,
-            playerTurn, setPlayerTurn,
+            board, 
+            setBoard, 
+            playerClass,
+            playerTurn, 
+            setPlayerTurn,
             handlePlayerChoiceSelect,
-            addToDomRef, gameOver, setGameOver, cellDomElements
+            addToDomRef,
+            gameOver, 
+            setGameOver, 
+            cellDomElements,
+            addCellDomHighlight
         }}>
             <Message gameMessage={gameOver.gameStatus && gameOver.draw ? 'Draw': gameOver.gameStatus && 
             !gameOver.draw ? 'Win': 'Tic Tac Toe'}/>
